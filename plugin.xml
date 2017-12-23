@@ -84,6 +84,9 @@
             </feature>
         </config-file>
 
+        <edit-config file="AndroidManifest.xml" target="/manifest" mode="merge">
+            <manifest xmlns:tools="http://schemas.android.com/tools"></manifest>
+        </edit-config>
         <config-file target="AndroidManifest.xml" parent="/manifest">
 			<uses-permission android:name="android.permission.BLUETOOTH" />
             <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -103,7 +106,8 @@
                      android:exported="true"
                      android:isolatedProcess="false"
                      android:label="iBeacon"
-                     android:name="org.altbeacon.beacon.service.BeaconService">
+                     android:name="org.altbeacon.beacon.service.BeaconService"
+                     tools:replace="android:exported,android:label">
                      <meta-data android:name="longScanForcingEnabled" android:value="true" />
             </service>
             <service android:enabled="true"
@@ -121,7 +125,7 @@
         <source-file src="src/android/ILocationManagerCommand.java" target-dir="src/com/unarin/cordova/beacon" />
         <source-file src="src/android/PausableThreadPoolExecutor.java" target-dir="src/com/unarin/cordova/beacon" />
 
-		<source-file src="libs/android/altbeacon.jar" target-dir="libs" framework="true" />
+        <framework src="org.altbeacon:android-beacon-library:+" />
     </platform>
 
 </plugin>
